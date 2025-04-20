@@ -1,0 +1,105 @@
+public class LinkedList<T> {
+    private Node<T> head;
+
+    public LinkedList(){
+        head = null;
+    }
+
+    public boolean isEmpty(){
+        return(head == null);
+    }
+
+    public void add(T data){
+        Node<T> temp = new Node<>(data);
+        if (head == null){
+            head = temp;
+        }else{
+            Node<T> cursor = head;
+            while (cursor.getNext() != null){
+                cursor = cursor.getNext();
+            }
+            cursor.setNext(temp);
+        }
+    }
+
+    public T get(int i){
+        if (isEmpty()){
+            return(null);
+        }else{
+            int count = 0;
+            Node<T> cursor = head;
+            while (count < i){
+                count++;
+                cursor = cursor.getNext();
+            }
+            return(cursor.getData());
+        }
+    }
+
+    public void set(int i, T data){
+        // TODO: Module 8 Exercise
+        // identical to get() except instead of returning data
+        // you set the data to the parametetr
+    }
+
+    public T remove(int i){
+        // TODO: Module 8 Exercise
+        // if list is empty, return null
+        // see other remove() method for hints
+        return(null);
+    }
+
+    public T remove(T data){
+        if (isEmpty()){
+            return(null);
+        }else if (head.getData().equals(data)){
+            head = head.getNext();
+            return(data);
+        }else{
+            Node<T> cursor = head.getNext();
+            Node<T> previous = head;
+            while (cursor != null){
+                if (cursor.getData().equals(data)){
+                    previous.setNext(cursor.getNext());
+                    return(data);
+                }
+                cursor = cursor.getNext();
+                previous = previous.getNext();
+            }
+            return(null);
+        }
+    }
+
+    public boolean contains(T data){
+        // TODO: Module 8 Exercise
+        // very similar to remove() but you just return true if you find it
+        // false otherwise
+        return(false);
+    }
+
+    public int indexOf(T data){
+        // TODO: Module 8 Exercise
+        // identical to contains(), but you return the index where it was found
+        //  returns -1 if it is not found
+        //  use a counter variable
+        return(-1);
+    }
+
+    public void clear(){
+        // TODO: Module 8 Exercise 
+    }
+
+    public int size(){
+        // TODO: Module 8 Exercise
+        // see the get(int) method 
+        return(0);
+    }
+
+    public String toString(){
+        // TODO: Module 8 
+        // Similar to size(), but with accumulating the string
+        String output = "";
+        return(output);
+    }
+
+}
