@@ -73,7 +73,7 @@ public class Main {
 
     public static long factorial(long n) {
         if (n == 0) {  // Base Case
-            return(1);
+            return(1);  // No  recursive call in the base case.
         } else {
             return (n * factorial(n - 1));
         }

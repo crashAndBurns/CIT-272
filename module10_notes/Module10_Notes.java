@@ -4,8 +4,12 @@ public class Module10_Notes {
 
     // A node class object can refer to itself
     // It works becasuse the variables are pointers to objects
-    // YOu can create a pointer to something that is itself
+    // You can create a pointer to something that is itself
 
     // Recursion is similar to this phenomenon.
+    
+
+    // 4/20/25
+    // Binary Trees Data Structure
     
 }
