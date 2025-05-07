@@ -53,7 +53,7 @@ public class OperatorNode implements ENode {
         double leftSide = left.getValue();
         // get value of the right
         double rightSide = right.getValue();
-        // perform associated opeartion according to operator
+        // perform associated operation according to operator
         switch (operator) {
             case "+" :
                 return leftSide + rightSide;

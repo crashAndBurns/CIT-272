@@ -120,29 +120,27 @@ public class Calculator {
                 if (operatorStack.isEmpty()) {
                     operatorStack.push(token);
                 } else {
-                    // b) compare priority of token to 
-                    //    priority of the stack top
-                    // i) if stack has lower priority than token,
-                    //    push it onto  operator stack.
-                    if (priority(operatorStack.peek()) < priority(token)) {
-                        operatorStack.push(token);
-                    } else {
-                        // ii) loop until top of stack has lower priority
-                        while (!operatorStack.isEmpty() && priority(operatorStack.peek()) >= priority(token)) {
-                            // A) pop the top operator and create a new OperatorNode
-                            //    with that top operator as its data.
-                            OperatorNode newOperatorNode = new OperatorNode(operatorStack.pop());
-                            // B) pop the top two operands and set them
-                            //    as left and right for the new
-                            //    operator node. (first is right, second is left)
-                            newOperatorNode.setRight(operandStack.pop());
-                            newOperatorNode.setLeft(operandStack.pop());
-                            // C) Push that operator node to the operand stack
-                            operandStack.push(newOperatorNode);
-                        }
-                        // E) Push new operator onto the operator stack
-                        operatorStack.push(token);
+                // b) compare priority of token to 
+                //    priority of the stack top
+                // i) if stack has lower priority than token,
+                //    push it onto  operator stack.
+                    // ii) loop until top of stack has lower priority
+                    while (!operatorStack.isEmpty() && priority(operatorStack.peek()) >= priority(token)) {
+                        handleOperand(operatorStack, operandStack);
+                        
+                        // // A) pop the top operator and create a new OperatorNode
+                        // //    with that top operator as its data.
+                        // OperatorNode newOperatorNode = new OperatorNode(operatorStack.pop());
+                        // // B) pop the top two operands and set them
+                        // //    as left and right for the new
+                        // //    operator node. (first is right, second is left)
+                        // newOperatorNode.setRight(operandStack.pop());
+                        // newOperatorNode.setLeft(operandStack.pop());
+                        // // C) Push that operator node to the operand stack
+                        // operandStack.push(newOperatorNode);
                     }
+                    // E) Push new operator onto the operator stack
+                    operatorStack.push(token);
                 }
             }
         }
@@ -150,18 +148,31 @@ public class Calculator {
         // Second Loop
         // While operator stack is not empty
         while (!operatorStack.isEmpty()) {
-            // 1. Pop top operator, create an operator node
-            OperatorNode operatorNode = new OperatorNode(operatorStack.pop());
-            // 2. Pop top two operands and set them as left and right for new operator node
-            operatorNode.setRight(operandStack.pop());
-            operatorNode.setLeft(operandStack.pop());
-            // 3.  Push t his operator node onto operand  stack
-            operandStack.push(operatorNode);
+            handleOperand(operatorStack, operandStack);
+            
+            // // 1. Pop top operator, create an operator node
+            // OperatorNode operatorNode = new OperatorNode(operatorStack.pop());
+            // // 2. Pop top two operands and set them as left and right for new operator node
+            // operatorNode.setRight(operandStack.pop());
+            // operatorNode.setLeft(operandStack.pop());
+            // // 3.  Push t his operator node onto operand  stack
+            // operandStack.push(operatorNode);
         }
         // When second loop is finished pop the operand stack and return
         // this node. It will be the rood node of the expression tree
         // for the final step
 
         return (operandStack.pop());
+    }
+
+    private void handleOperand(Stack<String> operatorStack, Stack<ENode> operandStack) {
+        // Pop top oerator, create an opertor node
+        OperatorNode operatorNode = new OperatorNode(operatorStack.pop());
+        // Pop top two operands and set them as  left and right
+        // (Right is first left is second)
+        operatorNode.setRight(operandStack.pop());
+        operatorNode.setLeft(operandStack.pop());
+        // push the opertor node onto the operand stack
+        operandStack.push(operatorNode);
     }
 }
